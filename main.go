@@ -33,6 +33,13 @@ func main() {
 	app := fiber.New()
 	micro := fiber.New()
 
+	app.Get("/", func(c *fiber.Ctx) error {
+		return c.Status(200).JSON(fiber.Map{
+			"status":  "success",
+			"message": "Welcome to Golang fiber api",
+		})
+	})
+
 	app.Get("/swagger/*", swagger.HandlerDefault) // default
 
 	app.Get("/swagger/*", swagger.New(swagger.Config{ // custom
@@ -66,7 +73,7 @@ func main() {
 	micro.Get("/healthchecker", func(c *fiber.Ctx) error {
 		return c.Status(200).JSON(fiber.Map{
 			"status":  "success",
-			"message": "Welcome to Golang, Fiber, MySQL, and GORM",
+			"message": "Welcome to Golang fiber api",
 		})
 	})
 
